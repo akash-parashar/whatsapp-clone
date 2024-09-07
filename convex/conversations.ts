@@ -86,17 +86,17 @@ export const getMyConversations = query({
           userDetails = userProfile[0];
         }
 
-        // const lastMessage = await ctx.db
-        // 	// .query("messages")
-        // 	.filter((q) => q.eq(q.field("conversation"), conversation._id))
-        // 	.order("desc")
-        // 	.take(1);
+        const lastMessage = await ctx.db
+          .query("messages")
+          .filter((q) => q.eq(q.field("conversation"), conversation._id))
+          .order("desc")
+          .take(1);
 
         // return should be in this order, otherwise _id field will be overwritten
         return {
           ...userDetails,
           ...conversation,
-          lastMessage: null,
+          lastMessage: lastMessage[0] || null,
         };
       })
     );

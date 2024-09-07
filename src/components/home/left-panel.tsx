@@ -1,16 +1,17 @@
 import { ListFilter, Search } from "lucide-react";
 import { Input } from "../ui/input";
 import ThemeSwitch from "./theme-switch";
-import { conversations } from "@/dummy-data/db";
+// import { conversations } from "@/dummy-data/db";
 import Conversation from "./coversation";
 import { UserButton } from "@clerk/nextjs";
 import UserListDialog from "./user-list-dialog";
-import { useConvexAuth } from "convex/react";
+import { useConvexAuth, useQuery } from "convex/react";
+import { api } from "../../../convex/_generated/api";
 
 const LeftPanel = () => {
   //   const conversations = [];
-  const { isAuthenticated} = useConvexAuth();
-
+  const { isAuthenticated } = useConvexAuth();
+  const conversations = useQuery(api.conversations.getMyConversations, isAuthenticated ? undefined : "skip");
 
   return (
     <div className="w-1/4 border-gray-600 border-r">
@@ -20,7 +21,7 @@ const LeftPanel = () => {
           <UserButton />
 
           <div className="flex items-center gap-3">
-          {isAuthenticated && <UserListDialog />}
+            {isAuthenticated && <UserListDialog />}
             {/* TODO: This line will be replaced with <UserListDialog /> */}
             <ThemeSwitch />
           </div>
