@@ -8,6 +8,7 @@ import { useConversationStore } from "@/store/chat-store";
 import toast from "react-hot-toast";
 import useComponentVisible from "@/hooks/useComponentVisible";
 import EmojiPicker, { Theme } from "emoji-picker-react";
+import MediaDropdown from "./media-dropdown";
 // import MediaDropdown from "./media-dropdown";
 
 
@@ -52,6 +53,7 @@ const MessageInput = () => {
 					)}
 					<Laugh className='text-gray-600 dark:text-gray-400' />
 				</div>
+      <MediaDropdown/>
 				
 			</div>
 
